@@ -81,10 +81,13 @@ import {
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification
+  ElNotification,
+  ElResult,
+  ElEmpty,
 } from 'element-plus'
 
 export const components = [
+  ElResult,
   ElAlert,
   ElAside,
   ElAutocomplete,
@@ -162,7 +165,8 @@ export const components = [
   ElTooltip,
   ElTransfer,
   ElTree,
-  ElUpload
+  ElUpload,
+  ElEmpty
 ]
 
 export const plugins = [ElInfiniteScroll, ElLoading, ElMessage, ElMessageBox, ElNotification]

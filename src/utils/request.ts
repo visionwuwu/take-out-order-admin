@@ -1,47 +1,96 @@
-import Axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { UserActionTypes } from '@/store/modules/user/action-types'
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useAppStore } from 'store/index'
+import { ApiStatusCode } from '@/common/enums/ApiStatusCode.enum'
 
-const baseURL = 'https://api.github.com'
 
-const axios = Axios.create({
-  baseURL,
-  timeout: 20000 // 请求超时 20s
+/** axios响应结果数据 */
+export interface AxiosResultData<T = any> {
+  code: number
+  message: string
+  data: T
+  page?: number
+  total?: number
+}
+
+const service = axios.create({
+  // 请求接口的基础地址
+  baseURL: import.meta.env.VITE_BASE_API as string,
+  // 5000ms内，未处理作为超时
+  timeout: 5000
 })
 
-// 前置拦截器（发起请求之前的拦截）
-axios.interceptors.request.use(
-  (response) => {
-    /**
-     * 根据你的项目实际情况来对 config 做处理
-     * 这里对 config 不做任何处理，直接返回
-     */
-    return response
+service.interceptors.request.use(
+  (config) => {
+    const store = useAppStore()
+    // 携带请求的令牌token
+    const user = store.state.user
+    if (user.token) {
+      const Bearer = import.meta.env.VITE_BASE_BEARER || 'Bearer'
+      config.headers['Authorization'] = Bearer + ' ' + user.token
+    }
+    return config
   },
   (error) => {
     return Promise.reject(error)
   }
 )
 
-// 后置拦截器（获取到响应时的拦截）
-axios.interceptors.response.use(
+service.interceptors.response.use(
   (response) => {
+    const res = response.data
+    const store = useAppStore()
+    console.log('======', res)
     /**
-     * 根据你的项目实际情况来对 response 和 error 做处理
-     * 这里对 response 和 error 不做任何处理，直接返回
+     * 通过判断状态码，统一处理响应，根据情况修改
+     * 同时也可以通过HTTP状态码判断请求结果
      */
-    return response
-  },
-  (error) => {
-    if (error.response && error.response.data) {
-      const code = error.response.status
-      const msg = error.response.data.message
-      ElMessage.error(`Code: ${code}, Message: ${msg}`)
-      // console.error(`[Axios Error]`, error.response)
+    if (res.code !== ApiStatusCode.OK) {
+      ElMessage.error({
+        type: 'error',
+        message: res.message || 'Error',
+        duration: 5 * 1000
+      })
+
+
+      // 50008：非法token; 50012：其他客户端已登录 50014：令牌过期
+      if (
+        res.code === ApiStatusCode.ILLEGAL_UNAUTHORIZED ||
+        res.code === ApiStatusCode.OTHER_CLIENT_LOGIN ||
+        res.code === ApiStatusCode.TOKEN_EXPIRED
+      ) {
+        ElMessageBox.confirm('您已登出，请重新登录', '确认', {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          store.dispatch(UserActionTypes.ACTION_RESET_TOKEN).then(() => {
+            location.reload()
+          })
+        })
+      }
+      return Promise.reject(new Error('error'))
     } else {
-      ElMessage.error(`${error}`)
+      return response as any
+    }
+  },
+  (error: AxiosError) => {
+    const response = error.response
+    if (response) {
+      const { data } = response
+      ElMessage({
+        message: data ? data.message : error.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
     }
     return Promise.reject(error)
   }
 )
 
-export default axios
+function createAxiosInstance<T = AxiosResultData>(config: AxiosRequestConfig) {
+  return service.request<T>(config)
+}
+
+export default createAxiosInstance

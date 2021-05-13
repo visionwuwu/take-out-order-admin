@@ -1,0 +1,24 @@
+// menu variables
+$menuBackgroundColor: #304156;
+$menuTextColor: #bfcbd9;
+$menuActiveTextColor: #409eff;
+$sideBarWidth: 210px;
+
+// submenu variables
+$subMenuActiveTextColor: #ffffff;
+$submenuBgColor: #1f2d3d;
+$submenuHoverBgColor: #001528;
+
+// menu-item variables
+$menuItemHoverBgColor: #263445;
+
+
+:export {
+  menuBackgroundColor: $menuBackgroundColor;
+  menuTextColor: $menuTextColor;
+  menuActiveTextColor: $menuActiveTextColor;
+  submenuBgColor: $submenuBgColor;
+  submenuHoverBgColor: $submenuHoverBgColor;
+  menuItemHoverBgColor: $menuItemHoverBgColor;
+  sideBarWidth: $sideBarWidth;
+}

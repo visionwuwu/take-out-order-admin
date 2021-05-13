@@ -1,0 +1,9 @@
+// 美化element-plus表格滚动条
+.el-table {
+  .el-table__body-wrapper {
+    @include scrollBar(7px);
+  }
+  .el-table__fixed-right {
+    height: calc(100% - 7px) !important;
+  }
+}
