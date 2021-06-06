@@ -6,13 +6,16 @@ import {
   reqModifyOrderStatus,
 } from 'apis/order/order'
 import { OrderModel, OrderStatus } from '@/apis/order/model/orderModel'
+import variables from 'styles/_variables.module.scss'
 
 export const orderStatusItems = [
-  { type: '', label: '已发货', value: OrderStatus.sendGoods },
-  { type: 'warning', label: '未发货', value: OrderStatus.unSendGoods },
-  { type: 'danger', label: '未付款', value: OrderStatus.unPaid },
-  { type: 'info', label: '已付款', value: OrderStatus.paid },
-  { type: 'success', label: '已送达', value: OrderStatus.delivered },
+  { color: variables.primary, label: '已发货', value: OrderStatus.sendGoods },
+  { color: variables.warning, label: '未发货', value: OrderStatus.unSendGoods },
+  { color: variables.danger, label: '未付款', value: OrderStatus.unPaid },
+  { color: variables.info, label: '已付款', value: OrderStatus.paid },
+  { color: variables.success, label: '已送达', value: OrderStatus.delivered },
+  { color: variables.magenta, label: '已取消', value: OrderStatus.cancelled },
+  { color: variables.purple, label: '已评价', value: OrderStatus.evaluated },
 ]
 
 // 订单列表逻辑抽离

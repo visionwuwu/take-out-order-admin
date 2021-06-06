@@ -15,7 +15,8 @@
         <template v-for="item in orderStatusItems" :key="item.label">
           <el-tag
             v-if="item.value === model.status"
-            :type="item.type"
+            :color="item.color"
+            :style="{borderColor: item.color}"
             size="small"
             effect="dark"
             >{{ item.label }}</el-tag

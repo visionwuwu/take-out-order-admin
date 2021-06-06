@@ -7,6 +7,6 @@
  */
 
 export default class Keys {
-  static tokenKey = 'TOKEN'
+  static tokenKey = 'TAKE_OUR_ORDER_ADMIN_TOKEN'
   static aseKey = 'yan-520-1314'
 }

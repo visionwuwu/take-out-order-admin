@@ -34,6 +34,8 @@
             {{ scope.row.user.username }}
           </template>
         </el-table-column>
+        <el-table-column prop="name" label="姓名" align="center" width="120px"></el-table-column>
+        <el-table-column prop="mobile" label="手机号" align="center" width="120px"></el-table-column>
         <el-table-column prop="price" label="价格" align="center">
           <template #default="scope">
             <el-tag type="success" size="small">{{ scope.row.price }}</el-tag>
@@ -50,7 +52,8 @@
             <div v-for="item in orderStatusItems" :key="item.label">
               <el-tag
                 v-if="item.value === scope.row.status"
-                :type="item.type"
+                :color="item.color"
+                :style="{borderColor: item.color}"
                 size="small"
                 effect="dark"
                 >{{ item.label }}</el-tag
@@ -58,7 +61,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="remarks" label="描述" width="200" align="center"></el-table-column>
+        <el-table-column prop="remarks" label="备注" width="200" align="center"></el-table-column>
         <el-table-column
           prop="createTime"
           label="创建时间"

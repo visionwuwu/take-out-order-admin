@@ -7,6 +7,7 @@
  */
 import {ElMessage, ElLoading} from 'element-plus'
 import { ElMessageBoxShortcutMethod } from 'element-plus/lib/el-message-box/src/message-box.type';
+import 'vue-router'
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {

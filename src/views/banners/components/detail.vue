@@ -22,7 +22,7 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
-        <el-form-item label="描述">
+        <el-form-item label="描述" prop="remarks">
           <el-input
             type="textarea"
             v-model="model.remarks"
@@ -71,7 +71,7 @@ export default defineComponent({
       rules: {
         image: [{ required: true, message: '请上传图片', trigger: 'blur' }],
       },
-      actions: defaultConfig.apiBaseUrl + '/files/single',
+      actions: import.meta.env.VITE_APP_UPLOAD_IMAGE_BASE_URL + '/files/single',
       headers: {
         Authorization: import.meta.env.VITE_BASE_BEARER + ' ' + getToken()
       },

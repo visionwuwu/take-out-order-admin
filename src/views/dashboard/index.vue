@@ -2,6 +2,8 @@
   <div class="app-container">
     <h1>dashboard-container</h1>
     <el-button type="primary" size="small" @click="go404Page">404</el-button>
+    <el-divider></el-divider>
+    <el-tag effect="dark"  color="#67C23A" style="border-color: #67C23A;" size="medium">red</el-tag>
     <router-view></router-view>
   </div>
 </template>

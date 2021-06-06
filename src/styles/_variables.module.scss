@@ -1,3 +1,21 @@
+// element-plus 主题色
+$primary: #409eff;
+
+// element-plus 辅助色
+$success: #67c23a !default;
+$warning: #e6a23c !default;
+$danger: #f56c6c !default;
+$info: #909399 !default;
+
+// 系统常用颜色
+$magenta: #c41d7f;
+$orange: #d46b08;
+$cyan: #08979c;
+$purple: #531dab;
+$lime: #7bb205;
+$green: #389e0d;
+$orangered: #ff5500;
+
 // menu variables
 $menuBackgroundColor: #304156;
 $menuTextColor: #bfcbd9;
@@ -21,4 +39,16 @@ $menuItemHoverBgColor: #263445;
   submenuHoverBgColor: $submenuHoverBgColor;
   menuItemHoverBgColor: $menuItemHoverBgColor;
   sideBarWidth: $sideBarWidth;
+  primary: $primary;
+  success: $success;
+  warning: $warning;
+  danger: $danger;
+  info: $info;
+  magenta: $magenta;
+  orange: $orange;
+  cyan: $cyan;
+  purple: $purple;
+  lime: $lime;
+  green: $green;
+  orangered: $orangered;
 }

@@ -64,7 +64,7 @@ export default defineComponent({
         image: [{ required: true, message: '请上传图片', trigger: 'blur' }],
         name: [{ required: true, message: '请输入菜品种类名称', trigger: 'blur' }]
       },
-      actions: defaultConfig.apiBaseUrl + '/files/single',
+      actions: import.meta.env.VITE_APP_UPLOAD_IMAGE_BASE_URL + '/files/single',
       headers: {
         Authorization: import.meta.env.VITE_BASE_BEARER + ' ' + getToken()
       }

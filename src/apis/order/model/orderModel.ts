@@ -1,4 +1,4 @@
-import { FoodList, FoodListItem } from "@/apis/food/model/foodModel";
+import { FoodListItem } from "@/apis/food/model/foodModel";
 import { UserModel } from "@/apis/sys/model/userModel";
 
 /** 订单筛选数据模型 */
@@ -18,6 +18,10 @@ export enum OrderStatus {
   unPaid = '3',
   /** 已送达 */
   delivered = '4',
+  /** 已取消 */
+  cancelled = '5',
+  /** 已评价 */
+  evaluated = '6',
 }
 
 /** 订单食物的数据模型 */

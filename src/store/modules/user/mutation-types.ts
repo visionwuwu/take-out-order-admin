@@ -1,4 +1,3 @@
-
 export enum UserMutationTypes {
   SET_TOKEN = 'SET_TOKEN',
   SET_USERNAME = 'SET_USERNAME',
